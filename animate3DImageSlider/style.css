@@ -1,0 +1,108 @@
+/* Global reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: rgb(14, 13, 13);
+}
+
+.banner {
+  width: 100%;
+  height: 100vh;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Slider settings (position, size, 3D effect, and animation) */
+.banner .slider {
+  position: absolute;
+  width: 200px;
+  height: 250px;
+  top: 16%;
+  left: calc(50% - 100px);
+  transform-style: preserve-3d;
+  transform: perspective(1000px);
+  animation: autoRun 20s linear infinite;
+}
+
+/* Keyframes for rotation animation */
+@keyframes autoRun {
+  from {
+    transform: perspective(1000px) rotateX(-16deg) rotateY(0deg);
+  }
+  to {
+    transform: perspective(1000px) rotateX(-16deg) rotateY(360deg);
+  }
+}
+
+/* Individual item inside the slider with 3D rotation and box-shadow */
+.banner .slider .item {
+  position: absolute;
+  inset: 0;
+  box-shadow: rgba(187, 184, 184, 0.1) 0px 10px 50px;
+  transform: rotateY(
+      calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)
+    )
+    translateZ(550px);
+}
+
+/* Ensure image covers the item fully without distortion */
+.banner .slider .item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Media queries for responsive design */
+
+/* For screens smaller than 1200px */
+@media (max-width: 1200px) {
+  .banner .slider {
+    width: 150px;
+    height: 180px;
+    top: 12%;
+  }
+
+  .banner .slider .item {
+    transform: rotateY(
+        calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)
+      )
+      translateZ(450px);
+  }
+}
+
+/* For screens smaller than 768px (tablets) */
+@media (max-width: 768px) {
+  .banner .slider {
+    width: 120px;
+    height: 150px;
+    top: 14%;
+  }
+
+  .banner .slider .item {
+    transform: rotateY(
+        calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)
+      )
+      translateZ(350px);
+  }
+}
+
+/* For screens smaller than 480px (mobile) */
+@media (max-width: 480px) {
+  .banner .slider {
+    width: 100px;
+    height: 120px;
+    top: 16%;
+  }
+
+  .banner .slider .item {
+    transform: rotateY(
+        calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)
+      )
+      translateZ(250px);
+  }
+}
